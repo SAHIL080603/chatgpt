@@ -24,7 +24,7 @@ for(let node of chat_list){
         clickedElement=node;
 
         let chats=null;
-        await fetch(`https://chatgpt-atbn.onrender.com/chats?q=${node.id}`)
+        await fetch(`http://localhost:4000/chats?q=${node.id}`)
         .then(res=>res.json())
         .then(data=>{
             chats=data.innerArray;
@@ -59,7 +59,7 @@ function del_update(){
     del=document.querySelectorAll('#delete');
     for(let btn of del){
     btn.addEventListener("click", async()=>{
-        await fetch(`https://chatgpt-atbn.onrender.com/remove?q=${btn.parentNode.id}`)
+        await fetch(`http://localhost:4000/remove?q=${btn.parentNode.id}`)
         .then(()=>{
             location.reload();
         })
@@ -71,7 +71,7 @@ del_update();
 
 async function getapi(){
     let api=null;
-    await fetch('https://chatgpt-atbn.onrender.com/getapi').then(res=>res.json())
+    await fetch('http://localhost:4000/getapi').then(res=>res.json())
     .then((data)=>{
         // console.log(data);
         api=data.api
@@ -82,11 +82,13 @@ async function getapi(){
 
 let API_URL="https://api.openai.com/v1/chat/completions";
 // let API_URL="https://chatgpt-api.shn.hk/v1/";
-// let API_KEY=`${api}`;
+let API_KEY=null;
+// let API_KEY=`${getapi()}`;
+
 
 sendbtn.addEventListener('click',async()=>{
     console.log(formcontrol);
-    // const res=await fetch(`https://chatgpt-atbn.onrender.com/prompt?p=${formcontrol.value}`);
+    // const res=await fetch(`http://localhost:4000/prompt?p=${formcontrol.value}`);
     // const body=await res.json();
     let s=`${column.innerHTML}`;
     const add=`<div class="p-3 column-child">
@@ -99,11 +101,13 @@ sendbtn.addEventListener('click',async()=>{
     const just=replies[replies.length-1];
     sendbtn.setAttribute('disabled','true');
     setTimeout(async()=>{
+        API_KEY=await getapi();
         const requestOptions ={
+            
             method:"POST",
             headers:{
                 'Content-Type': 'application/json',
-                Authorization:`Bearer ${getapi()}`,
+                Authorization:`Bearer ${API_KEY}`,
             },
             body: JSON.stringify({
                 "model": "gpt-3.5-turbo",
@@ -125,7 +129,7 @@ sendbtn.addEventListener('click',async()=>{
                 // console.log(formcontrol.value);
                 // console.log(column.id);
                 
-                await fetch(`https://chatgpt-atbn.onrender.com/add?prompt=${formcontrol.value}&reply=${message}&id=${column.id}`)
+                await fetch(`http://localhost:4000/add?prompt=${formcontrol.value}&reply=${message}&id=${column.id}`)
                 .then(res=>res.json())
                 .then((data)=>{
                     if(!column.id){
@@ -154,7 +158,7 @@ sendbtn.addEventListener('click',async()=>{
                 message=data.choices[0].message.content;
                
                 
-                await fetch(`https://chatgpt-atbn.onrender.com/add?prompt=${formcontrol.value}&reply=${message}&id=${column.id}`)
+                await fetch(`http://localhost:4000/add?prompt=${formcontrol.value}&reply=${message}&id=${column.id}`)
                 .then(res=>res.json())
                 .then((data)=>{
                     if(!column.id){
