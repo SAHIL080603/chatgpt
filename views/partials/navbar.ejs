@@ -1,0 +1,96 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between w-100 align-items-center">
+      <a class="navbar-brand" href="#"><img class="ms-2 me-1" width="30px" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/chatgpt-icon.png" alt="_img"> ChatGpt</a>
+      <% if(currentUser){%>
+        
+      
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <% } %>
+    </div>
+
+    <% if(currentUser){%>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ChatGpt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 mb-4">
+          <li class="nav-item mb-2 active-buttons border border-black p-2 rounded new_chat" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+            <a class="nav-link active " aria-current="page" href="#"><span class="ms-2 me-3">+</span>New Chat</a>
+          </li>
+          <div class="middle-nav">
+            <% for(let chat of currentUser.chats){%>
+              <div class="d-flex mx-2 mt-2 chats p-1 rounded chat-list" id="<%=chat._id%>">
+                <span class="material-symbols-outlined me-2">
+                  mode_comment
+                </span>
+                <p class="text-truncate"><%=chat.innerArray[0].prompt%> (<%=chat._id%>)</p>
+                <span class="material-symbols-outlined" id="delete">
+                  delete
+                </span>
+              </div>
+            <% } %>
+          </div>
+          
+        </ul>
+        <div class="btn-group dropup w-100">
+          
+          <button type="button" class="btn btn-secondary dropdown-toggle p-3" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= currentUser.username %>
+          </button>
+          <ul class="dropdown-menu w-100">
+            <!-- Dropdown menu links -->
+            <li class="nav-item mb-2 active-buttons">
+              <a class="nav-link active p-2 rounded" aria-current="page" href="#">Dark Mode</a>
+            </li>
+            <!-- <li class=""> -->
+              <li type="button" class="nav-item mb-2 active-buttons" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a class="nav-link active p-2 rounded" aria-current="page">Update Api</a> 
+              </li>
+            <!-- </li> -->
+            <li class="nav-item mb-2 active-buttons">
+              <a class="nav-link active p-2 rounded" aria-current="page" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <% } %>
+    
+    
+  </div>
+</nav>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Api</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/updateapi">
+          <div class="mb-3">
+            <label for="exampleInputApi2" class="form-label">Your API key - get it form <a href="https://platform.openai.com/account/api-keys" target="_blank">API_KEY</a></label>
+            <input type="text" class="form-control" id="exampleInputApi2" aria-describedby="emailHelp" name="api" required>
+            <div id="emailHelp" class="form-text">We'll never share your api with anyone else.</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >Save Changes</button>
+          </div>
+          
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

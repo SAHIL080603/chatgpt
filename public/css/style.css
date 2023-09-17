@@ -1,0 +1,33 @@
+.chats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chats:hover{
+    background-color: grey;
+}
+
+.middle-nav{
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+.active-buttons:hover{
+    background-color: rgb(210, 209, 209);
+}
+
+.column{
+    /* background-color: aqua; */
+    height: 80vh; 
+    overflow-y: scroll;
+}
+
+.column-child:nth-child(odd){
+    background-color: rgb(210, 209, 209);
+}
+
+
+#delete:hover{
+    cursor: pointer;
+    color: red;
+}

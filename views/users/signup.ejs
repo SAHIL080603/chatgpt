@@ -1,0 +1,27 @@
+<% layout('layout/boilerplate') -%>
+
+<form method="POST" action="/signup">
+    <div class="mb-3">
+      <label for="exampleInputEmail2" class="form-label">Email address/Username</label>
+      <input name="username" type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" required>
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputApi2" class="form-label">Your API key - get it form <a href="https://platform.openai.com/account/api-keys" target="_blank">API_KEY</a></label>
+      <input type="text" class="form-control" id="exampleInputApi2" aria-describedby="emailHelp" name="api" required>
+      <div id="emailHelp" class="form-text">We'll never share your api with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword2" class="form-label">Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword2" required>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck2" required>
+      <label class="form-check-label" for="exampleCheck2">Check me out</label>
+    </div>
+    <p>Already have an account? <a href="/login">LogIn</a></p>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >SignUp</button>
+    </div>
+    
+  </form>
