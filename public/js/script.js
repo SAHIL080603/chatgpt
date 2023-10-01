@@ -137,7 +137,7 @@ sendbtn.addEventListener('click',async()=>{
                     if(!column.id){
                         column.id=data.id;
                         let s = middle_nav.innerHTML;
-                        let add= `<div class="d-flex mx-2 mt-2 chats p-1 rounded chat-list" id="${column.id}">
+                        let add= `<div class="  mx-2 mt-2 chats p-1 rounded chat-list" id="${column.id}">
                         <span class="material-symbols-outlined me-2">
                           mode_comment
                         </span>
@@ -166,7 +166,7 @@ sendbtn.addEventListener('click',async()=>{
                     if(!column.id){
                         column.id=data.id;
                         let s = middle_nav.innerHTML;
-                        let add= `<div class="d-flex mx-2 mt-2 chats p-1 rounded chat-list" id="${column.id}">
+                        let add= `<div class="  mx-2 mt-2 chats p-1 rounded chat-list" id="${column.id}">
                         <span class="material-symbols-outlined me-2">
                           mode_comment
                         </span>
