@@ -59,11 +59,13 @@ function del_update(){
     del=document.querySelectorAll('#delete');
     for(let btn of del){
     btn.addEventListener("click", async()=>{
+        const parent =btn.parentElement;
+        parent.style.display='none';
         await fetch(`https://chatgpt-atbn.onrender.com/remove?q=${btn.parentNode.id}`)
         .then(()=>{
             location.reload();
         })
-        console.log(btn.parentNode.id);
+        // console.log(parent);
     })
 }
 }
